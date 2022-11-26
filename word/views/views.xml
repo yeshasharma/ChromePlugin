@@ -1,0 +1,143 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <template id="assets_backend" name="word assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/word/static/src/js/word.js"/>
+            <script type="text/javascript" src="/word/static/lib/pdfjs/pdf.js"/>
+            <script type="text/javascript" src="/word/static/lib/pdfjs/pdf.worker.js"/>
+            <script type="text/javascript" src="/word/static/lib/pdfjs/text_layer_builder.js"/>
+            <link rel="stylesheet" href="/word/static/src/css/text_layer_builder.css"/>
+        </xpath>
+    </template>
+
+    <record model="ir.actions.client" id="action_word_pdf">
+      <field name="name">word PDF</field>
+      <field name="tag">word.pdf</field>
+    </record>
+
+    <record model="ir.ui.view" id="word.form">
+      <field name="name">word form</field>
+      <field name="model">word.word</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <header>
+              <button name="SearchMeaning" type="object" string="Search Meaning" class="oe_highlight">
+              </button>
+            </header>
+            <group>
+             <field name="name"/>
+             <field name="category_ids"  widget="many2many_tags"/>
+            </group>
+
+            <field name="meaning_ids">
+               <tree>
+                 <field name="name"/>
+               </tree>
+             </field> 
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="word.list">
+      <field name="name">word list</field>
+      <field name="model">word.word</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="meaning_ids">
+              <tree>
+                <field name="name"/>
+              </tree>
+          </field>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="word_meaning_form">
+      <field name="name">word form</field>
+      <field name="model">word.meaning</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+           <group>
+            <field name="name"/>
+           </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="word_meaning_list">
+      <field name="name">word form</field>
+      <field name="model">word.meaning</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="word_category_form">
+      <field name="name">word form</field>
+      <field name="model">word.category</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+           <group>
+            <field name="name"/>
+           </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="word_category_list">
+      <field name="name">word list</field>
+      <field name="model">word.category</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="word.action_window">
+      <field name="name">Words</field>
+      <field name="res_model">word.word</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="word_meaning_action_window">
+      <field name="name">Words</field>
+      <field name="res_model">word.meaning</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="word_category_action_window">
+      <field name="name">Words</field>
+      <field name="res_model">word.category</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Top menu item -->
+    
+    <menuitem name="word" id="word.menu_root"/>
+    
+    <!-- menu categories -->
+    
+    <menuitem name="Words" id="word.menu_1" parent="word.menu_root"/>
+
+    
+    <!-- actions -->
+    <menuitem name="words list" id="word.menu_1_list" parent="word.menu_1"
+              action="word.action_window"/>
+    
+    <menuitem name="PDF" id="word.menu_1_pdf" parent="word.menu_1"
+              action="action_word_pdf"/>
+  </data>
+</odoo>

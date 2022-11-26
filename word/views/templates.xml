@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+       <template id="index">
+           <t t-call="website.layout">
+               <t t-set="title">Word</t>
+                   <form action="/word/word/meaning">
+                      <div class="oe_structure">
+                        <div class="container">
+                         
+                          <header>
+                            <br></br>
+                            <!-- <a class="btn">Search</a> -->
+                            <input type="submit" value="Search Meaning" style="background-color:#875a7b;">
+                            </input>
+                          </header>
+
+                          <div class="form-group field-name">
+                          <br></br>                       
+                            <label for="word" class="control-label">Word</label>
+                              <input type="text" name="word" id="word" class="form-control" placeholder="Enter word">
+                              </input>
+                          </div>
+                    
+                        </div>
+                      </div>
+                   </form>
+
+                <div class="oe_structure">
+                    <div class="container">
+                        <textarea rows="10" cols="140">
+                         <t t-foreach="results" t-as="word">
+                             <t t-esc="word.name"/>
+                         </t>
+                         <t t-foreach="categories" t-as="category">
+                             <t t-esc="category"/>
+                         </t>
+                         <t t-foreach="meanings" t-as="meaning">
+                             <t t-esc="meaning"/>
+                         </t>    
+                        </textarea>
+                        
+                    </div>
+                </div>   
+            </t>
+       </template>
+    </data>
+</odoo>
+
+
+                    

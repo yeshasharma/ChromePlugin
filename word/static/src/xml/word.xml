@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="word_template">
+
+    	<div id="result" align="right">
+    		<span>Category -- </span><t t-esc="categories"/><br/>
+    		<span>Meaning --</span><t t-esc="meanings"/>
+    		
+    	</div>
+
+        <div id="container"></div>       
+    </t>
+</templates>
